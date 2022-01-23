@@ -10,11 +10,11 @@ function App() {
   const [timerOn, setTimerOn] = useState(false);
 
   const renderTime = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60)
-    const seconds = remainingTime % 60
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
 
     if (remainingTime === 0) {
-      return <button className="start-button"
+      return <button className="large-button"
       onClick={() => {
         setKey(prevKey => prevKey + 1)
         setTime(workTime)
@@ -24,21 +24,22 @@ function App() {
     }
 
     if (remainingTime === workTime) {
+
       if (timerOn === false) {
-        return <button className="start-button" onClick={() => setTimerOn(true)}>
+        return <button className="large-button" onClick={() =>  setTimerOn(true)}>
         <BsPlayFill size="100" />
       </button>
       }
+
       else {
         return (
           <div className="timer">
-            <div className="text">Remaining</div>
             <div className="value">{minutes}:{("0"+ seconds).slice(-2)}</div>
             <div>
-              <BsPauseFill  className="stop-button"
+              <BsPauseFill  className="small-button"
                             size="30"
                             onClick={() => setTimerOn(false)}  />
-              <BsStopFill   className="stop-button"
+              <BsStopFill   className="small-button"
                             size="30"
                             onClick={() => {setKey(prevKey => prevKey + 1);}}     />
             </div>
@@ -51,13 +52,12 @@ function App() {
       if (timerOn === false){
         return (
           <div className="timer">
-            <div className="text">Remaining</div>
             <div className="value">{minutes}:{("0"+ seconds).slice(-2)}</div>
             <div>
-              <BsPlayFill  className="stop-button"
+              <BsPlayFill  className="small-button"
                             size="30"
                             onClick={() => setTimerOn(true)}  />
-              <BsStopFill   className="stop-button"
+              <BsStopFill   className="small-button"
                             size="30"
                             onClick={() => {
                               setKey(prevKey => prevKey + 1)
@@ -67,16 +67,16 @@ function App() {
           </div>
         );
       }
+
       else {
         return (
           <div className="timer">
-            <div className="text">Remaining</div>
             <div className="value">{minutes}:{("0"+ seconds).slice(-2)}</div>
             <div>
-              <BsPauseFill  className="stop-button"
+              <BsPauseFill  className="small-button"
                             size="30"
                             onClick={() => setTimerOn(false)}  />
-              <BsStopFill   className="stop-button"
+              <BsStopFill   className="small-button"
                             size="30"
                             onClick={() => {
                               setKey(prevKey => prevKey + 1);
@@ -85,25 +85,8 @@ function App() {
           </div>
         );
       }
-      }}
-
-    /*if (timerOn === true && remainingTime < 15) {
-    return (
-      <div className="timer">
-        <div className="text">Remaining</div>
-        <div className="value">{remainingTime}</div>
-        <div>
-          <BsPauseFill  className="stop-button"
-                        size="30"
-                        onClick={() => setTimerOn(false)}  />
-          <BsStopFill   className="stop-button"
-                        size="30"
-                        onClick={() => {setTimerOn(false);
-                                        setTime(15);}}     />
-        </div>
-      </div>
-    );
-    };*/
+      }
+    }
 
   return (
     <div className="App">
@@ -112,6 +95,8 @@ function App() {
           key={key}
           isPlaying={timerOn}
           duration={time}
+          size={250}
+          strokeWidth={16}
           colors={["#FCE4EC", "#F06292", "#D81B60", "#880E4F"]}
           colorsTime={[1500, 1000, 500, 0]}
           onComplete={() => ({ shouldRepeat: false, delay: 1 })}
