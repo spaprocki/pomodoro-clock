@@ -91,6 +91,9 @@ function App() {
   return (
     <div className="App">
       <div className="timer-wrapper">
+        <div className="timer-header">
+          {'Pomodoro Clock'}
+        </div>
         <CountdownCircleTimer className="circle-timer"
           key={key}
           isPlaying={timerOn}
