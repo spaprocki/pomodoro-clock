@@ -10,10 +10,9 @@
 }
 
 .timer-wrapper {
-  padding: 0px 30px 30px 30px;
+  padding: 0px 40px 30px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   border-radius: 10%;
   background-color: whitesmoke;
   opacity: 0.8;
@@ -45,13 +44,22 @@
 }
 
 
-.button-wrapper {
-  text-align: center;
-  margin-top: 40px;
+.session-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-style: normal;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .large-button {
-  transition-duration: 0.5s;
   border-radius: 50%;
   background-color: transparent;
   height: 250px;
@@ -59,9 +67,6 @@
   border: none;
 }
 
-.large-button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
 
 .small-button {
   height: 60px;
@@ -71,4 +76,11 @@
   border-width: 2px;
   background: transparent;
   background-color: transparent;
+}
+
+.status {
+  font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-style: normal;
+  color: silver;
 }
