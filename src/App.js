@@ -16,7 +16,8 @@ function App() {
   const [key, setKey] = useState(0);
   const [time, setTime] = useState(workTime);
   const [timerOn, setTimerOn] = useState(false);
-  const [status, setStatus] = useState('Session')
+  const [status, setStatus] = useState("Session");
+  const [isPaused, setIsPaused] = useState(false);
 
   const renderTime = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
@@ -55,13 +56,17 @@ function App() {
               <BsPauseFill
                 className="small-button"
                 size="30"
-                onClick={() => setTimerOn(false)}
+                onClick={() => {
+                  setTimerOn(false);
+                  setIsPaused(true);
+                }}
               />
               <BsStopFill
                 className="small-button"
                 size="30"
                 onClick={() => {
                   setKey((prevKey) => prevKey + 1);
+                  setIsPaused(false);
                 }}
               />
             </div>
@@ -82,7 +87,10 @@ function App() {
               <BsPlayFill
                 className="small-button"
                 size="30"
-                onClick={() => setTimerOn(true)}
+                onClick={() => {
+                  setTimerOn(true);
+                  setIsPaused(false);
+                }}
               />
               <BsStopFill
                 className="small-button"
@@ -91,6 +99,7 @@ function App() {
                   setKey((prevKey) => prevKey + 1);
                   setTime(workTime);
                   setTimerOn(false);
+                  setIsPaused(false);
                 }}
               />
             </div>
@@ -107,7 +116,10 @@ function App() {
               <BsPauseFill
                 className="small-button"
                 size="30"
-                onClick={() => setTimerOn(false)}
+                onClick={() => {
+                  setTimerOn(false);
+                  setIsPaused(true);
+                }}
               />
               <BsStopFill
                 className="small-button"
@@ -115,6 +127,7 @@ function App() {
                 onClick={() => {
                   setKey((prevKey) => prevKey + 1);
                   setTimerOn(false);
+                  setIsPaused(false);
                 }}
               />
             </div>
@@ -141,21 +154,19 @@ function App() {
           <div id="session-label">Session Length</div>
           <div className="buttons-wrapper">
             <BsFillCaretLeftFill
-              className="smaller-button"
               size="20"
               onClick={() => {
-                if (timerOn === false) {
+                if (timerOn === false && isPaused === false) {
                   setWorkTime((prevworkTime) => prevworkTime - 60);
                   setTime((prevTime) => prevTime - 60);
                 }
               }}
             />
-            <div>{(("0" + (workTime/60)).slice(-2))}</div>
+            <div>{("0" + workTime / 60).slice(-2)}</div>
             <BsFillCaretRightFill
-              className="smaller-button"
               size="20"
               onClick={() => {
-                if (timerOn === false) {
+                if (timerOn === false && isPaused === false) {
                   setWorkTime((prevworkTime) => prevworkTime + 60);
                   setTime((prevTime) => prevTime + 60);
                 }
@@ -168,15 +179,17 @@ function App() {
           <div id="break-label">Break Length</div>
           <div className="buttons-wrapper">
             <BsFillCaretLeftFill
-              className="smaller-button"
               size="20"
-              onClick={() => setPauseTime((prevpauseTime) => prevpauseTime - 60)}
+              onClick={() =>
+                setPauseTime((prevpauseTime) => prevpauseTime - 60)
+              }
             />
-            <div>{(("0" + (pauseTime/60)).slice(-2))}</div>
+            <div>{("0" + pauseTime / 60).slice(-2)}</div>
             <BsFillCaretRightFill
-              className="smaller-button"
               size="20"
-              onClick={() => setPauseTime((prevpauseTime) => prevpauseTime + 60)}
+              onClick={() =>
+                setPauseTime((prevpauseTime) => prevpauseTime + 60)
+              }
             />
           </div>
         </div>
@@ -196,15 +209,14 @@ function App() {
               setTime(pauseTime);
               setTimerOn(true);
               setKey((prevKey) => prevKey + 1);
-              setStatus('Break');
+              setStatus("Break");
               return { shouldRepeat: true, delay: 1 };
-
             } else {
               playSound();
               setTime(workTime);
               setTimerOn(false);
               setKey((prevKey) => prevKey + 1);
-              setStatus('Session');
+              setStatus("Session");
               return { shouldRepeat: false, delay: 1 };
             }
           }}
